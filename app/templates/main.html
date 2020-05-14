@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <script type="text/javascript" charset="utf-8">
+        var socket;
+        var rooms = {};
+
+        function getCookie(name) {
+            let matches = document.cookie.match(new RegExp(
+                "(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
+            ));
+            return matches ? decodeURIComponent(matches[1]) : undefined;
+        }
+
+        $(document).ready(function(){
+            socket = io.connect('http://' + document.domain + ':' + location.port + '/');
+
+            socket.on('connect', function() {
+                function getRandomInt(max) {
+                    return Math.floor(Math.random() * Math.floor(max));
+                }
+
+                var name = getCookie('name');
+                if (name == '') {
+                    var names = ["Harry Potter", "Jolly tomato", "the postman Pechkin", "Kolobok"];
+                    name = prompt("Please enter your nickname:", names[getRandomInt(names.length)]);
+                    document.cookie = "name=" + name;
+                }
+                socket.emit('joined', {name: name});
+            });
+
+            socket.on('id', function(data){
+                document.cookie = "id=" + data['id'];
+                alert('id = ' + getCookie('id'));
+            });
+
+            socket.on('room', function(data) {
+                var room_name = data['room_name'], current_num_players = data['current_num_players'],
+                    need_num_of_players = data['need_num_of_players'];
+
+            });
+
+            socket.on('message', function(data) {
+                $('#h').text(data['msg']);
+            });
+            $('#button').click(function(e) {
+                socket.emit('click', {msg: 'it is click'});
+            });
+        });
+    </script>
+    <h1 id="h"></h1>
+{% endblock %}
+

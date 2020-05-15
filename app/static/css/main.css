@@ -1,0 +1,16 @@
+#add-room{
+    height: 100px;
+    width: 100px;
+    background-color: #888888;
+}
+
+.room{
+    background-color: aquamarine;
+    display: flex;
+    justify-content: space-between;
+}
+
+.room > *{
+    display: inline-block;
+
+}

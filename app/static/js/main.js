@@ -32,7 +32,7 @@ $(document).ready(function(){
 
         let room_node_num_participants = document.createElement('div');
         room_node_num_participants.className = 'room-num-participants';
-        room_node_num_participants.innerText = current_players + '/' + need_players;
+        room_node_num_participants.innerText = data['room_num_participants_str'];
         room_node.append(room_node_num_participants);
 
         document.body.append(room_node);

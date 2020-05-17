@@ -1,7 +1,7 @@
 from flask import Blueprint
 
 main = Blueprint('main', __name__)
-rooms = []
+rooms = {}
 guests = {}
 
 from . import routes, events

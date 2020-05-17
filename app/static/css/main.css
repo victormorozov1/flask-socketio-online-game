@@ -14,3 +14,8 @@
     display: inline-block;
 
 }
+
+.room-join:hover{
+    background-color: red;
+    display: block;
+}

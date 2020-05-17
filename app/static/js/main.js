@@ -27,12 +27,18 @@ $(document).ready(function(){
         let room_node_join = document.createElement('div');
         room_node_join.className = 'room-join';
         room_node_join.id = 'join-' + room_id;
-        room_node_join.innerText = 'join';
+        console.log(data['players']);
+        if (data['players'].indexOf(getCookie('id')) !== -1){
+            room_node_join.innerText = 'joined';
+        }
+        else{
+            room_node_join.innerText = 'join';
+        }
         room_node.append(room_node_join);
 
         let room_node_num_participants = document.createElement('div');
         room_node_num_participants.className = 'room-num-participants';
-        room_node_num_participants.innerText = data['room_num_participants_str'];
+        room_node_num_participants.innerText = data['room_num_players_str'];
         room_node.append(room_node_num_participants);
 
         document.body.append(room_node);
@@ -81,7 +87,7 @@ $(document).ready(function(){
         show_room(data);
     });
 
-    socket.on('new_room_participant', function(data) {
+    socket.on('new_room_player', function(data) {
         console.log('new_room_participant');
         id = data['id']
         room_id = data['room_id']
@@ -97,6 +103,4 @@ $(document).ready(function(){
     $('#add-room').click(function() {
         socket.emit('add_room', {name: 'new room', need_players: 4, id: getCookie('id')});
     });
-
-
 });

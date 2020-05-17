@@ -10,6 +10,12 @@ class Guest:
         guests[self.id] = self
         self.room = None
 
+    def leave_room(self):
+        if self.room:
+            self.room.players.remove(self)
+            self.room = None
+            return True
+
     def __str__(self):
         return f'Class Guest. id={self.id}, name={self.name}'
 

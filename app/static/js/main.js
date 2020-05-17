@@ -24,17 +24,23 @@ $(document).ready(function(){
         room_node_name.href = '/room/' + room_id;
         room_node.append(room_node_name);
 
+        let room_node_leave = document.createElement('div');
+        room_node_leave.className = 'room-leave';
+        room_node_leave.innerText = 'leave room';
+        $(room_node_leave).css('display', 'none');
         let room_node_join = document.createElement('div');
         room_node_join.className = 'room-join';
         room_node_join.id = 'join-' + room_id;
         console.log(data['players']);
         if (data['players'].indexOf(getCookie('id')) !== -1){
             room_node_join.innerText = 'joined';
+            $(room_node_leave).css('display', 'block');
         }
         else{
             room_node_join.innerText = 'join';
         }
         room_node.append(room_node_join);
+        room_node.append(room_node_leave);
 
         let room_node_num_participants = document.createElement('div');
         room_node_num_participants.className = 'room-num-participants';
@@ -50,6 +56,11 @@ $(document).ready(function(){
             socket.emit('join_room', {room_id: this.id.split('-')[1], id: getCookie('id')});
         });
 
+        $('.room-leave').click(function (event) {
+            event.stopPropagation();
+            event.stopImmediatePropagation();
+            socket.emit('leave_room', {id: getCookie('id')});
+        });
     }
 
     socket = io.connect('http://' + document.domain + ':' + location.port + '/');
@@ -96,8 +107,20 @@ $(document).ready(function(){
             if ($(this).attr('id') === room_id){
                 $(this).children('.room-join').text('joined');
                 $(this).children('.room-num-participants').text(data['room-num-participants']);
+                $(this).children('.room-leave').css('display', 'block');
             }
         });
+    });
+
+    socket.on('player_leave_room', function(data) {
+        id = data['id']
+        room_id = data['room']['id']
+        console.log('player', id, 'leave room', room_id);
+        if (getCookie('id') === id) {
+            $('#' + room_id).children('.room-leave').css('display', 'none');
+            $('#' + room_id).children('.room-join').text('join');
+        }
+        $('#' + room_id).children('.room-num-participants').text(data['room']['room_num_players_str'])
     });
 
     $('#add-room').click(function() {

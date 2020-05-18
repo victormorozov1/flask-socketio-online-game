@@ -50,8 +50,11 @@ class Room:
         return f'{len(self.players)}/{self.need_players}'
 
     def data(self):
-        return {'name': self.name, 'need_players': self.need_players, 'current_players': 1, 'id': self.id,
-                'room_num_players_str': self.room_num_players_str(), 'players': [player.id for player in self.players]}
+        return {'name': self.name,
+                'need_players': self.need_players,
+                'current_players': 1, 'id': self.id,
+                'room_num_players_str': self.room_num_players_str(),
+                'players': [player.id for player in self.players]}
 
     def __str__(self):
         return f'Class Room. name={self.name}, players: {len(self.players)}/{self.need_players}, size: {self.n}*{self.m}'

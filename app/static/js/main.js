@@ -10,6 +10,7 @@ function getCookie(name) {
 }
 
 $(document).ready(function(){
+    var my_id;
     function show_room(data) {
         console.log('showing room');
         var room_name = data['name'], current_players = data['current_players'],
@@ -32,7 +33,7 @@ $(document).ready(function(){
         room_node_join.className = 'room-join';
         room_node_join.id = 'join-' + room_id;
         console.log(data['players']);
-        if (data['players'].indexOf(getCookie('id')) !== -1){
+        if (data['players'].indexOf(my_id) !== -1){
             room_node_join.innerText = 'joined';
             $(room_node_leave).css('display', 'block');
         }
@@ -53,13 +54,13 @@ $(document).ready(function(){
         $('.room-join').click(function (event) {
             event.stopPropagation();
             event.stopImmediatePropagation();
-            socket.emit('join_room', {room_id: this.id.split('-')[1], id: getCookie('id')});
+            socket.emit('join_room', {room_id: this.id.split('-')[1], id: my_id});
         });
 
         $('.room-leave').click(function (event) {
             event.stopPropagation();
             event.stopImmediatePropagation();
-            socket.emit('leave_room', {id: getCookie('id')});
+            socket.emit('leave_room', {id: my_id});
         });
     }
 
@@ -78,11 +79,12 @@ $(document).ready(function(){
             document.cookie = "name=" + name;
         }
         console.log('name = ', name);
-        socket.emit('joined', {name: name, id: getCookie('id')});
+        socket.emit('joined', {name: name, id: my_id});
     });
 
     socket.on('id', function(data){
         document.cookie = "id=" + data['id'];
+        my_id = data['id'];
     });
 
     socket.on('all_rooms', function(data){
@@ -107,11 +109,12 @@ $(document).ready(function(){
         $('.room').each(function( index ) {
             console.log($(this).attr('id'));
             if ($(this).attr('id') === room_id){
-                if (id === getCookie('id')) {
+                if (id === my_id) {
                     $(this).children('.room-join').text('joined');
                     $(this).children('.room-leave').css('display', 'block');
                 }
-                $(this).children('.room-num-participants').text(data['room-num-participants']);
+                $(this).children('.room-num-participants').text(room_data['room_num_players_str']);
+
             }
         });
     });
@@ -120,7 +123,7 @@ $(document).ready(function(){
         id = data['id']
         room_id = data['room']['id']
         console.log('player', id, 'leave room', room_id);
-        if (getCookie('id') === id) {
+        if (my_id === id) {
             $('#' + room_id).children('.room-leave').css('display', 'none');
             $('#' + room_id).children('.room-join').text('join');
         }
@@ -128,6 +131,6 @@ $(document).ready(function(){
     });
 
     $('#add-room').click(function() {
-        socket.emit('add_room', {name: 'new room', need_players: 4, id: getCookie('id')});
+        socket.emit('add_room', {name: 'new room', need_players: 4, id: my_id});
     });
 });

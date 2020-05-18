@@ -49,4 +49,4 @@ def add_room(message):
     if guests[id].room:
         room_id = guests[id].room.id
     if guests[id].leave_room():
-        emit('player_leave_room', {'id': id, 'room': rooms[room_id].data()})
+        emit('player_leave_room', {'id': id, 'room': rooms[room_id].data()}, room=0)

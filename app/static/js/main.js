@@ -101,13 +101,17 @@ $(document).ready(function(){
     socket.on('new_room_player', function(data) {
         console.log('new_room_participant');
         id = data['id']
-        room_id = data['room_id']
+        room_data = data['room']
+        room_id = room_data['id']
         console.log(id, room_id);
         $('.room').each(function( index ) {
+            console.log($(this).attr('id'));
             if ($(this).attr('id') === room_id){
-                $(this).children('.room-join').text('joined');
+                if (id === getCookie('id')) {
+                    $(this).children('.room-join').text('joined');
+                    $(this).children('.room-leave').css('display', 'block');
+                }
                 $(this).children('.room-num-participants').text(data['room-num-participants']);
-                $(this).children('.room-leave').css('display', 'block');
             }
         });
     });

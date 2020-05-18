@@ -41,8 +41,7 @@ def add_room(message):
     room = rooms[message['room_id']]
     player = guests[message['id']]
     if room.add_player(player):
-        emit('new_room_player', {'id': message['id'], 'room_id': message['room_id'],
-                                      'room-num-participants': room.room_num_players_str()}, room=0)
+        emit('new_room_player', {'id': message['id'], 'room': room.data()}, room=0)
 
 
 @socketio.on('leave_room', namespace='/')

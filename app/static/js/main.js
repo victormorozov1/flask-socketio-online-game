@@ -68,9 +68,6 @@ $(document).ready(function(){
 
     socket.on('connect', function() {
         console.log('connected');
-        function getRandomInt(max) {
-            return Math.floor(Math.random() * Math.floor(max));
-        }
 
         var name = getCookie('name');
         if (!name) {
@@ -78,8 +75,9 @@ $(document).ready(function(){
             name = prompt("Please enter your nickname:", names[getRandomInt(names.length)]);
             document.cookie = "name=" + name;
         }
+
         console.log('name = ', name);
-        socket.emit('joined', {name: name, id: my_id});
+        socket.emit('joined', {name: name, id: getCookie('id')});
     });
 
     socket.on('id', function(data){

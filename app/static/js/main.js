@@ -106,6 +106,11 @@ $(document).ready(function(){
         room_data = data['room']
         room_id = room_data['id']
         console.log(id, room_id);
+
+        if (room_data['ready']){
+            window.location.replace("/room/" + room_id);
+        }
+
         $('.room').each(function( index ) {
             console.log($(this).attr('id'));
             if ($(this).attr('id') === room_id){
@@ -131,6 +136,6 @@ $(document).ready(function(){
     });
 
     $('#add-room').click(function() {
-        socket.emit('add_room', {name: 'new room', need_players: 4, id: my_id});
+        socket.emit('add_room', {name: 'new room', need_players: 2, id: my_id});
     });
 });

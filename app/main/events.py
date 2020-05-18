@@ -5,8 +5,6 @@ from app.main.functions import get_id
 from . import guests, rooms
 from .classes import Room, Guest
 
-clicked = 0
-
 
 @socketio.on('joined', namespace='/')
 def joined(message):

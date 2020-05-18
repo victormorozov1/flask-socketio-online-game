@@ -26,7 +26,7 @@ $(document).ready(function(){
         let room_node_name = document.createElement('a');
         room_node_name.className = 'room-name';
         room_node_name.innerText = room_name;
-        room_node_name.href = '/room/' + room_id;
+        room_node_name.href = '/room/' + room_id + '/' + my_id;
         room_node.append(room_node_name);
 
         let room_node_leave = document.createElement('div');
@@ -110,7 +110,7 @@ $(document).ready(function(){
         console.log(id, room_id);
 
         if (room_data['ready']){
-            window.location.replace("/room/" + room_id);
+            window.location.replace("/room/" + room_id + '/' + my_id);
         }
 
         $('.room').each(function( index ) {
@@ -121,7 +121,6 @@ $(document).ready(function(){
                     $(this).children('.room-leave').css('display', 'block');
                 }
                 $(this).children('.room-num-participants').text(room_data['room_num_players_str']);
-
             }
         });
     });
@@ -138,6 +137,6 @@ $(document).ready(function(){
     });
 
     $('#add-room').click(function() {
-        socket.emit('add_room', {name: 'new room', need_players: 2, id: my_id});
+        socket.emit('add_room', {name: 'new room', need_players: 2, id: my_id, m: 30});
     });
 });

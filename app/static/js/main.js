@@ -9,6 +9,10 @@ function getCookie(name) {
     return matches ? decodeURIComponent(matches[1]) : undefined;
 }
 
+function getRandomInt(max) {
+    return Math.floor(Math.random() * Math.floor(max));
+}
+
 $(document).ready(function(){
     var my_id;
     function show_room(data) {

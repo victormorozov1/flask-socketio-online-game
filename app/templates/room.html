@@ -6,9 +6,11 @@
 
 {% block content %}
     <p>{{ cell_sz }}</p>
-    {% for i in range(n) %}
-        <div class="row">{% for j in range(m) %}<div class="cell" id="{{ i }};{{ j }}"></div>{% endfor %}</div>
-    {% endfor %}
+    <div id="field">
+        {% for i in range(n) %}
+            <div class="row">{% for j in range(m) %}<div class="cell" id="{{ i }};{{ j }}"></div>{% endfor %}</div>
+        {% endfor %}
+    </div>
     <script>
         var n = {{ n }};
         var m = {{ m }};
@@ -20,8 +22,10 @@
                 <div class="message">{{ message.message }} {{ message.author }} {{ message.time }}</div>
             {% endfor %}
         </div>
-        <input id="message-input">
-        <div id="send-message">Send message</div>
+        <div id="send-message-panel">
+            <input id="message-input">
+            <div id="send-message">Send message</div>
+        </div>
     </div>
     <script src="{{ url_for('static', filename="js/room.js") }}"></script>
 {% endblock %}

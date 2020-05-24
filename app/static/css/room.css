@@ -3,6 +3,10 @@
     margin: 0;
 }
 
+#field{
+    display: inline-block;
+}
+
 .row{
     width: 100%;
     display: block;
@@ -24,19 +28,33 @@
     margin: 10px;
     border-radius: 10px;
     border: 3px solid #666666;
+    height: 600px;
+    float: right;
+    width: 300px;
+    display: inline-block;
+}
+
+#message-list{
+    overflow: scroll;
+    width: 70%;
+    height: 100%;
+    background-color: aqua;
+    display: inline-block;
+}
+
+#send-message-panel{
+    display: inline-block;
+    overflow: hidden;
+    background-color: yellow;
 }
 
 #message-input{
     background-color: red;
     float: right;
+    display: inline-block;
 }
 
-#message-list{
-    overflow: scroll;
-    width: 50%;
-    height: 100%;
-    background-color: aqua;
-}
+
 
 #send-message{
     float: right;
@@ -44,4 +62,5 @@
     width: 355px;
     font-size: 30px;
     background-color: green;
+    display: inline-block;
 }

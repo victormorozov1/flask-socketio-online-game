@@ -14,7 +14,7 @@ def chat_message(message):
 
     join_room(room_id)
     rooms[room_id].messages.append(Message(chat_message, author=author))
-    emit("chat_message", {"chat_message": chat_message, "author": author}, room=room_id)
+    emit("chat_message", {"chat_message": chat_message, "author": author, "time": rooms[room_id].messages[-1].time}, room=room_id)
 
 
 @socketio.on('joined', namespace='/')

@@ -17,7 +17,6 @@ change_cell_size();
 var socket = io.connect('http://' + document.domain + ':' + location.port + '/room');
 
 $("#send-message").click(function () {
-    alert(getCookie('name'));
     socket.emit('chat_message', {
         chat_message: $("#message-input").val(),
         room_id: window.location.toString().split('/')[4],
@@ -31,7 +30,7 @@ socket.on('chat_message', function(data) {
 
     let message = document.createElement('div');
     message.className = "message";
-    message.innerText = data["chat_message"] + ' ' + data["author"];
+    message.innerText = data["chat_message"] + ' ' + data["author"] + ' ' + data["time"];
     message_node.append(message);
 
     $("#message-list").append(message_node);

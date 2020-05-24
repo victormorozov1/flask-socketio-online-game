@@ -17,7 +17,7 @@
     <div id="chat">
         <div id="message-list">
             {% for message in messages %}
-                <div class="message">{{ message.message }} {{ message.author }}</div>
+                <div class="message">{{ message.message }} {{ message.author }} {{ message.time }}</div>
             {% endfor %}
         </div>
         <input id="message-input">

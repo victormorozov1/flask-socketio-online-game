@@ -1,5 +1,5 @@
 from flask import session, redirect, url_for, render_template, request
-from . import main, rooms, guests
+from . import main, rooms, guests, messages
 from .classes import Room
 
 
@@ -10,5 +10,5 @@ def index():
 
 @main.route('/room/<room_id>/<player_id>', methods=['GET', 'POST'])
 def room(room_id, player_id):
-    room = rooms[room_id]
-    return render_template('room.html', n=room.n, m=room.m)
+    room = rooms[int(room_id)]
+    return render_template('room.html', n=room.n, m=room.m, messages=rooms[int(room_id)].messages)

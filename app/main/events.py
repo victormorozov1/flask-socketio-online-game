@@ -2,17 +2,19 @@ from flask import session
 from flask_socketio import emit, join_room, leave_room
 from .. import socketio
 from app.main.functions import get_id
-from . import guests, rooms
+from . import guests, rooms, messages
 from .classes import Room, Guest
 
 
 @socketio.on('chat_message', namespace='/room')
-def joined(message):
+def chat_message(message):
     print("chat message", message['chat_message'])
     room_id = int(message["room_id"])
+    message = message["chat_message"]
     print(f"room id = {room_id}")
     join_room(room_id)
-    emit("chat_message", {"chat_message": message["chat_message"], "author": "server"}, room=room_id)
+    rooms[room_id].messages.append(message)
+    emit("chat_message", {"chat_message": message, "author": "server"}, room=room_id)
 
 
 @socketio.on('joined', namespace='/')
@@ -34,6 +36,7 @@ def add_room(message):
     print('in add room')
     print('id', message['id'])
     creator = guests[message['id']]
+
     if not creator.room:
         room = Room(message['name'], message['need_players'], creator,
                     message['n'] if 'n' in message.keys() else 20, message['m'] if 'm' in message.keys() else 30)

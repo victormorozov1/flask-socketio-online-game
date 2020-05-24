@@ -16,7 +16,9 @@
 
     <div id="chat">
         <div id="message-list">
-            <div class="message">Chat created</div>
+            {% for message in messages %}
+                <div class="message">{{ message }}</div>
+            {% endfor %}
         </div>
         <input id="message-input">
         <div id="send-message">Send message</div>

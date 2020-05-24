@@ -31,6 +31,7 @@ class Room:
         self.id = get_id()
         rooms[self.id] = self
         self.creator.room = self
+        self.messages = []
 
     def add_player(self, player):
         if len(self.players) < self.need_players:

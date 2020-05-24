@@ -52,7 +52,7 @@ $(document).ready(function(){
         room_node_num_participants.innerText = data['room_num_players_str'];
         room_node.append(room_node_num_participants);
 
-        document.body.append(room_node);
+        //document.body.append(room_node);
         $('#rooms-list').append(room_node);
 
         $('.room-join').click(function (event) {

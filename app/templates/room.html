@@ -13,6 +13,14 @@
         var n = {{ n }};
         var m = {{ m }};
     </script>
+
+    <div id="chat">
+        <div id="message-list">
+            <div class="message">Chat created</div>
+        </div>
+        <input id="message-input">
+        <div id="send-message">Send message</div>
+    </div>
     <script src="{{ url_for('static', filename="js/room.js") }}"></script>
 {% endblock %}
 

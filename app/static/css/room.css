@@ -20,3 +20,28 @@
     box-sizing: border-box;
 }
 
+#chat{
+    margin: 10px;
+    border-radius: 10px;
+    border: 3px solid #666666;
+}
+
+#message-input{
+    background-color: red;
+    float: right;
+}
+
+#message-list{
+    overflow: scroll;
+    width: 50%;
+    height: 100%;
+    background-color: aqua;
+}
+
+#send-message{
+    float: right;
+    height: 50px;
+    width: 355px;
+    font-size: 30px;
+    background-color: green;
+}

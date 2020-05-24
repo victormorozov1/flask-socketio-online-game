@@ -6,6 +6,15 @@ from . import guests, rooms
 from .classes import Room, Guest
 
 
+@socketio.on('chat_message', namespace='/room')
+def joined(message):
+    print("chat message", message['chat_message'])
+    room_id = int(message["room_id"])
+    print(f"room id = {room_id}")
+    join_room(room_id)
+    emit("chat_message", {"chat_message": message["chat_message"], "author": "server"}, room=room_id)
+
+
 @socketio.on('joined', namespace='/')
 def joined(message):
     id = message['id'] if 'id' in message else get_id()

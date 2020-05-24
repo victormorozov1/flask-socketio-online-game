@@ -36,4 +36,6 @@ socket.on('chat_message', function(data) {
     message_node.append(message);
 
     $("#message-list").append(message_node);
+
+    $('#message-list').scrollTop(1000000);
 });

@@ -1,7 +1,15 @@
 from . import guests, rooms
 from .functions import get_id
 import json
+import time
 
+
+class Message:
+    def __init__(self, message, author=None, time=time.asctime()):
+        self.message = message
+        self.author = author
+        self.time = time
+        
 
 class Guest:
     def __init__(self, id, name='Guest'):

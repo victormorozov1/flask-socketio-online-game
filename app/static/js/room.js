@@ -16,6 +16,8 @@ change_cell_size();
 
 var socket = io.connect('http://' + document.domain + ':' + location.port + '/room');
 
+socket.emit("join", {room_id: window.location.toString().split('/')[4]});
+
 $("#send-message").click(function () {
     socket.emit('chat_message', {
         chat_message: $("#message-input").val(),
@@ -34,5 +36,4 @@ socket.on('chat_message', function(data) {
     message_node.append(message);
 
     $("#message-list").append(message_node);
-
 });

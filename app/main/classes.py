@@ -5,10 +5,13 @@ from datetime import datetime
 
 
 class Message:
-    def __init__(self, message, author=None, time=f'{datetime.now().hour}:{datetime.now().minute}'):
+    def __init__(self, message, author=None, time=None):
+        if time:
+            self.time = time
+        else:
+            self.time = f'{str(datetime.now().hour).rjust(2, "0")}:{str(datetime.now().minute).rjust(2, "0")}'
         self.message = message
         self.author = author
-        self.time = time
 
 
 class Guest:

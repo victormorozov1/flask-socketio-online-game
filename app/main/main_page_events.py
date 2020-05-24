@@ -37,7 +37,7 @@ def add_room(message):
 def add_room(message):
     print('in join room')
     print('room-id', message['room_id'])
-    room = rooms[message['room_id']]
+    room = rooms[int(message['room_id'])]
     player = guests[message['id']]
     if room.add_player(player):
         emit('new_room_player', {'id': message['id'], 'room': room.data()}, room=0)

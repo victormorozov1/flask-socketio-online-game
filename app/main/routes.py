@@ -8,7 +8,7 @@ def index():
     return render_template('main.html', forms=filter(lambda room: not room.ready(), rooms.values()))
 
 
-@main.route('/room/<room_id>/<player_id>', methods=['GET', 'POST'])
-def room(room_id, player_id):
+@main.route('/room/<room_id>', methods=['GET', 'POST'])
+def room(room_id):
     room = rooms[int(room_id)]
     return render_template('room.html', n=room.n, m=room.m, messages=rooms[int(room_id)].messages)

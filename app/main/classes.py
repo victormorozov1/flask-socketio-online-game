@@ -61,7 +61,8 @@ class Room:
     def data(self):
         return {'name': self.name,
                 'need_players': self.need_players,
-                'current_players': 1, 'id': self.id,
+                'current_players': 1,
+                'id': str(self.id),
                 'room_num_players_str': self.room_num_players_str(),
                 'players': [player.id for player in self.players],
                 'ready': len(self.players) == self.need_players}

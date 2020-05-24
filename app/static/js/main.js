@@ -15,7 +15,7 @@ $(document).ready(function(){
         let room_node_name = document.createElement('a');
         room_node_name.className = 'room-name';
         room_node_name.innerText = room_name;
-        room_node_name.href = '/room/' + room_id + '/' + my_id;
+        room_node_name.href = '/room/' + room_id;
         room_node.append(room_node_name);
 
         let room_node_leave = document.createElement('div');
@@ -93,13 +93,13 @@ $(document).ready(function(){
 
     socket.on('new_room_player', function(data) {
         console.log('new_room_participant');
-        id = data['id']
-        room_data = data['room']
-        room_id = room_data['id']
+        id = data['id'];
+        room_data = data['room'];
+        room_id = room_data['id'];
         console.log(id, room_id);
 
         if (room_data['ready']){
-            window.location.replace("/room/" + room_id + '/' + my_id);
+            window.location.replace("/room/" + room_id);
         }
 
         $('.room').each(function( index ) {
@@ -115,8 +115,8 @@ $(document).ready(function(){
     });
 
     socket.on('player_leave_room', function(data) {
-        id = data['id']
-        room_id = data['room']['id']
+        id = data['id'];
+        room_id = data['room']['id'];
         console.log('player', id, 'leave room', room_id);
         if (my_id === id) {
             $('#' + room_id).children('.room-leave').css('display', 'none');

@@ -11,7 +11,17 @@ function change_cell_size() {
         $(this).css('width', sz + 'px');
     });
 }
+/*
+function field_arr_processing(){
+    for (let i = 0; i < field.length; i++){
+        for (let j = 0; j < field[i].length; j++){
+            if (field[i][j] == 1){
 
+            }
+        }
+    }
+}
+*/
 change_cell_size();
 
 $('#message-list').scrollTop(1000000);

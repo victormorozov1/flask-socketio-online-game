@@ -8,12 +8,21 @@
     <p>{{ cell_sz }}</p>
     <div id="field">
         {% for i in range(n) %}
-            <div class="row">{% for j in range(m) %}<div class="cell" id="{{ i }}-{{ j }}"><div class="cell-picture"></div></div>{% endfor %}</div>
+            <div class="row">{% for j in range(m) %}<div class="cell" id="{{ i }}-{{ j }}">
+                {% if field[i][j] == 0 %}
+                    <div class="cell-picture"></div>
+                {% elif field[i][j] == 1 %}
+                    <div class="cell-picture cross"></div>
+                {% else %}
+                    <div class="cell-picture wall"></div>
+                {% endif %}
+            </div>{% endfor %}</div>
         {% endfor %}
     </div>
     <script>
         var n = {{ n }};
         var m = {{ m }};
+        var field = {{ field }};
     </script>
 
     <div id="chat">

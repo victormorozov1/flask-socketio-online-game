@@ -52,7 +52,7 @@ socket.on('set_cell_value', function(data) {
         $(cell_picture).addClass("cross");
     }
     else{
-        cell_picture.className = "wall";
+        $(cell_picture).addClass("wall");
     }
 });
 

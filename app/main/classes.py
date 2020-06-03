@@ -33,7 +33,7 @@ class Guest:
 
 
 class Room:
-    def __init__(self, name, need_players, creator, n=20, m=30):
+    def __init__(self, name, need_players, creator, n=20, m=30, num_of_actions_per_turn=3):
         self.name = name
         self.need_players = need_players
         self.creator = creator
@@ -48,6 +48,7 @@ class Room:
         self.field = None
         self.started = False
         self.colors = ['rgb(255, 0, 0)', 'rgb(0, 255, 0)', 'rgb(0, 0, 255)', 'rgb(200, 100, 50)']
+        self.num_of_actions_per_turn = num_of_actions_per_turn
 
     def get_arr(self):
         arr = []
@@ -95,13 +96,14 @@ class Room:
                 'ready': len(self.players) == self.need_players}
 
     def click(self, x, y, player_id):
+        current_player_ind = self.current_player // self.num_of_actions_per_turn
         if not self.started:
             return {'message': 'game is not started yet'}
-        if player_id != self.players[self.current_player].id:
+        if player_id != self.players[current_player_ind].id:
             return {'message': "it is not your step yet"}
-        ret = self.field.click(x, y, self.colors[self.current_player])
+        ret = self.field.click(x, y, self.colors[current_player_ind])
         if ret['message'] == 'ok':
-            self.current_player = (self.current_player + 1) % self.need_players
+            self.current_player = (self.current_player + 1) % (self.need_players * self.num_of_actions_per_turn)
         return ret
 
     def __str__(self):

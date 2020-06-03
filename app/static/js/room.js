@@ -45,7 +45,7 @@ socket.on('chat_message', function(data) {
 
 socket.on('set_cell_value', function(data) {
     if (data['message'] === 'ok') {
-        let x = data["x"], y = data["y"], value = data["value"];
+        let x = data["x"], y = data["y"], value = data["value"], color = data["color"];
         let id = x + "-" + y;
         let cell_picture = $(`#${id}`).children(".cell-picture");
 
@@ -55,6 +55,7 @@ socket.on('set_cell_value', function(data) {
             $(cell_picture).removeClass("cross");
             $(cell_picture).addClass("wall");
         }
+        $(cell_picture).css("background-color", color);
     }
     else{
         alert(data['message']);

@@ -47,6 +47,15 @@ class Room:
         self.current_player = 0
         self.field = None
         self.started = False
+        self.colors = ['rgb(255, 0, 0)', 'rgb(0, 255, 0)', 'rgb(0, 0, 255)', 'rgb(200, 100, 50)']
+
+    def get_arr(self):
+        arr = []
+        for i in self.field.arr:
+            arr.append([])
+            for j in i:
+                arr[-1].append([j.val, j.color])
+        return arr
 
     def start(self):
         self.started = True
@@ -84,12 +93,11 @@ class Room:
 
     def click(self, x, y, player_id):
         if not self.started:
-            return False, 'game is not started yet'
+            return {'message': 'game is not started yet'}
         if player_id != self.players[self.current_player].id:
-            print(f'{player_id} != {self.players[self.current_player].id}')
-            return False, "it is not your step yet"
-        ret = self.field.click(x, y, player_id)
-        if ret[0]:
+            return {'message': "it is not your step yet"}
+        ret = self.field.click(x, y, self.colors[self.current_player])
+        if ret['message'] == 'ok':
             self.current_player = (self.current_player + 1) % self.need_players
         return ret
 
@@ -100,21 +108,17 @@ class Room:
 class Cell:
     def __init__(self):
         self.val = 0  # 0 - empty cell, 1 - x, 2 - wall
-        self.color_id = None
+        self.color = None
 
     def __bool__(self):
         return self.val < 2
 
-    def click(self, player_id):
-        if self.val == 0:
-            self.val = 1
-            self.color_id = player_id
-            return True, 'ok'
-        elif self.val == 1 and player_id != self.color_id:
-            self.val = 2
-            self.color_id = player_id
-            return True, 'ok'
-        return False, "you can't click on the wall"
+    def click(self, color):
+        if self.val != 2:
+            self.val += 1
+            self.color = color
+            return {'message': 'ok', 'color': color}
+        return {'message': "you can't click on the wall"}
 
 
 class Field:

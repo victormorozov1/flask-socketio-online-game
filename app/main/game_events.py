@@ -12,8 +12,14 @@ def field_click(message):
     print(x, y)
     res = rooms[room_id].click(x, y, player_id)
     print(res)
-    if res[0]:
+    if res['message'] == 'ok':
         print("true")
-        emit('set_cell_value', {'message': 'ok', 'x': x, 'y': y, 'value': str(rooms[room_id].field.arr[x][y].val)}, room=room_id)
+        emit('set_cell_value', {'message': 'ok',
+                                'x': x,
+                                'y': y,
+                                'value': str(rooms[room_id].field.arr[x][y].val),
+                                'color': res['color']
+                                },
+        room=room_id)
     else:
-        emit('set_cell_value', {'message': res[1]})
+        emit('set_cell_value', {'message': res['message']})

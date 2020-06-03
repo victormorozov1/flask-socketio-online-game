@@ -11,6 +11,6 @@ def index():
 @main.route('/room/<int:room_id>', methods=['GET', 'POST'])
 def room(room_id):
     room = rooms[room_id]
-    print([[j.val for j in i] for i in rooms[room_id].field.arr])
+    print(rooms[room_id].get_arr())
     return render_template('room.html', n=room.n, m=room.m, messages=rooms[room_id].messages,
-                           field=[[j.val for j in i] for i in rooms[room_id].field.arr])
+                           field=rooms[room_id].get_arr())

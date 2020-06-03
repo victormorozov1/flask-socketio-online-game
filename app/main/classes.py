@@ -46,8 +46,10 @@ class Room:
         self.messages = []
         self.current_player = 0
         self.field = None
+        self.started = False
 
     def start(self):
+        self.started = True
         self.field = Field(self.n, self.m)
 
     def add_player(self, player):
@@ -81,6 +83,8 @@ class Room:
                 'ready': len(self.players) == self.need_players}
 
     def click(self, x, y, player_id):
+        if not self.started:
+            return False, 'game is not started yet'
         if player_id != self.players[self.current_player].id:
             print(f'{player_id} != {self.players[self.current_player].id}')
             return False, "it is not your step yet"

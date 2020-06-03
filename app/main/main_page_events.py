@@ -8,7 +8,7 @@ from .classes import Room, Guest, Message
 
 @socketio.on('joined', namespace='/')
 def joined(message):
-    id = message['id'] if 'id' in message else get_id()
+    id = int(message['id']) if 'id' in message else get_id()
     global guest
     if id in guests:
         guest = guests[id]

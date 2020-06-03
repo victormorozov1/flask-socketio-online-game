@@ -82,8 +82,12 @@ class Room:
 
     def click(self, x, y, player_id):
         if player_id != self.players[self.current_player].id:
+            print(f'{player_id} != {self.players[self.current_player].id}')
             return False, "it is not your step yet"
-        return self.field.click(x, y, player_id)
+        ret = self.field.click(x, y, player_id)
+        if ret[0]:
+            self.current_player = (self.current_player + 1) % self.need_players
+        return ret
 
     def __str__(self):
         return f'Class Room. name={self.name}, players: {len(self.players)}/{self.need_players}, size: {self.n}*{self.m}'

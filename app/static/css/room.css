@@ -91,3 +91,9 @@
     -moz-transform:rotate(-45deg);
     transform:rotate(-45deg);
 }
+
+.wall{
+    height: 100%;
+    width: 100%;
+    background-color: red;
+}

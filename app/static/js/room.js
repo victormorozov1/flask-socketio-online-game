@@ -52,6 +52,7 @@ socket.on('set_cell_value', function(data) {
         if (value === "1") {
             $(cell_picture).addClass("cross");
         } else {
+            $(cell_picture).removeClass("cross");
             $(cell_picture).addClass("wall");
         }
     }

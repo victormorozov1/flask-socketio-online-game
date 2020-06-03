@@ -60,6 +60,9 @@ class Room:
     def start(self):
         self.started = True
         self.field = Field(self.n, self.m)
+        a = [(0, 0), (0, self.m - 1), (self.n - 1, 0), (self.m - 1, self.n - 1)]
+        for i in range(self.need_players):
+            self.field.arr[a[i][0]][a[i][1]].click(self.colors[i])
 
     def add_player(self, player):
         if len(self.players) < self.need_players:
@@ -114,6 +117,8 @@ class Cell:
         return self.val < 2
 
     def click(self, color):
+        if self.color == color:
+            return {'message': 'this is already your cell'}
         if self.val != 2:
             self.val += 1
             self.color = color
@@ -124,29 +129,40 @@ class Cell:
 class Field:
     def __init__(self, n, m):
         self.n, self.m = n, m
-        self.players = []
         self.arr = []
         for i in range(n):
             self.arr.append([])
             for j in range(m):
                 self.arr[-1].append(Cell())
 
-    def neighboring_cells(self, x, y):
-        ret = []
-        if x > 0:
-            ret.append(self.arr[x - 1][y])
-        if x < self.n - 1:
-            ret.append(self.arr[x + 1][y])
-        if y > 0:
-            ret.append(self.arr[x][y - 1])
-        if y < self.m - 1:
-            ret.append(self.arr[x][y - 1])
-        return ret
+    def cell_exist_near(self, x, y, color, start=True):
+        if start:
+            self.used = []
+            for i in range(self.n):
+                self.used.append([])
+                for j in range(self.m):
+                    self.used[-1].append(False)
 
-    def click(self, x, y, player_id):
-        #if player_id in [cell.color_id for cell in self.neighboring_cells(x, y)]:
-        return self.arr[x][y].click(player_id)
-        #return False
+        self.used[x][y] = True
+
+        print("cell exist near", x, y, color)
+        if self.arr[x][y].color != color and not start:
+            print(f'    wrong color, {self.arr[x][y].color} != {color}')
+            return False
+        if self.arr[x][y].val == 1 and self.arr[x][y].color == color:
+            return True
+        for plus_x, plus_y in [(1, 0), (0, 1), (-1, 0), (0, -1)]:
+            new_x, new_y = x + plus_x, y + plus_y
+            print(f'newx = {new_x}, newy = {new_y}')
+            if new_x in range(self.n) and new_y in range(self.m):
+                if not self.used[new_x][new_y] and self.cell_exist_near(new_x, new_y, color, start=False):
+                    return True
+        return False
+
+    def click(self, x, y, color):
+        if self.cell_exist_near(x, y, color):
+            return self.arr[x][y].click(color)
+        return {'message': 'you can build cell here'}
 
 
 

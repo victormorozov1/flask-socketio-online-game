@@ -126,6 +126,6 @@ $(document).ready(function(){
     });
 
     $('#add-room').click(function() {
-        socket.emit('add_room', {name: 'new room', need_players: 2, id: my_id, m: 30});
+        socket.emit('add_room', {name: 'new room', need_players: 2, id: my_id, n: 4, m: 4});
     });
 });

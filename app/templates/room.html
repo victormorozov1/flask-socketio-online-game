@@ -8,7 +8,7 @@
     <p>{{ cell_sz }}</p>
     <div id="field">
         {% for i in range(n) %}
-            <div class="row">{% for j in range(m) %}<div class="cell" id="{{ i }};{{ j }}"></div>{% endfor %}</div>
+            <div class="row">{% for j in range(m) %}<div class="cell" id="{{ i }}-{{ j }}"><div class="cell-picture"></div></div>{% endfor %}</div>
         {% endfor %}
     </div>
     <script>

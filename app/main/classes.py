@@ -2,6 +2,7 @@ from . import guests, rooms
 from .functions import get_id
 import json
 from datetime import datetime
+from .constants import COLORS
 
 
 class Message:
@@ -43,6 +44,11 @@ class Room:
         rooms[self.id] = self
         self.creator.room = self
         self.messages = []
+        self.current_player = 0
+        self.field = None
+
+    def start(self):
+        self.field = Field(self.n, self.m)
 
     def add_player(self, player):
         if len(self.players) < self.need_players:
@@ -55,6 +61,10 @@ class Room:
         if not player.room and len(self.players) < self.need_players:
             self.players.append(player)
             player.room = self
+
+            if len(self.players) == self.need_players:
+                self.start()
+
             return True
         return False
 
@@ -70,6 +80,66 @@ class Room:
                 'players': [player.id for player in self.players],
                 'ready': len(self.players) == self.need_players}
 
+    def click(self, x, y, player_id):
+        #if player_id != self.players[self.current_player].id:
+         #   return False
+        return self.field.click(x, y, player_id)
+
     def __str__(self):
         return f'Class Room. name={self.name}, players: {len(self.players)}/{self.need_players}, size: {self.n}*{self.m}'
+
+
+class Cell:
+    def __init__(self):
+        self.val = 0  # 0 - empty cell, 1 - x, 2 - wall
+        self.color_id = None
+
+    def __bool__(self):
+        return self.val < 2
+
+    def click(self, player_id):
+        if self.val == 0:
+            self.val = 1
+            self.color_id = player_id
+            return True
+        elif self.val == 1 and player_id != self.color_id:
+            self.val = 2
+            self.color_id = player_id
+            return True
+        return False
+
+
+class Field:
+    def __init__(self, n, m):
+        self.n, self.m = n, m
+        self.players = []
+        self.arr = []
+        for i in range(n):
+            self.arr.append([])
+            for j in range(m):
+                self.arr[-1].append(Cell())
+
+    def neighboring_cells(self, x, y):
+        ret = []
+        if x > 0:
+            ret.append(self.arr[x - 1][y])
+        if x < self.n - 1:
+            ret.append(self.arr[x + 1][y])
+        if y > 0:
+            ret.append(self.arr[x][y - 1])
+        if y < self.m - 1:
+            ret.append(self.arr[x][y - 1])
+        return ret
+
+    def click(self, x, y, player_id):
+        #if player_id in [cell.color_id for cell in self.neighboring_cells(x, y)]:
+        return self.arr[x][y].click(player_id)
+        #return False
+
+
+
+
+
+
+
 

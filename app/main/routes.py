@@ -8,6 +8,11 @@ def index():
     return render_template('main.html', forms=filter(lambda room: not room.ready(), rooms.values()))
 
 
+@main.route('/rules', methods=['GET', 'POST'])
+def rules():
+    return render_template('rules.html')
+
+
 @main.route('/room/<int:room_id>', methods=['GET', 'POST'])
 def room(room_id):
     room = rooms[room_id]

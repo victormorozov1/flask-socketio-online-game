@@ -44,15 +44,19 @@ socket.on('chat_message', function(data) {
 });
 
 socket.on('set_cell_value', function(data) {
-    let x = data["x"], y = data["y"], value = data["value"];
-    let id = x + "-" + y;
-    let cell_picture = $(`#${id}`).children(".cell-picture");
+    if (data['message'] === 'ok') {
+        let x = data["x"], y = data["y"], value = data["value"];
+        let id = x + "-" + y;
+        let cell_picture = $(`#${id}`).children(".cell-picture");
 
-    if (value === "1"){
-        $(cell_picture).addClass("cross");
+        if (value === "1") {
+            $(cell_picture).addClass("cross");
+        } else {
+            $(cell_picture).addClass("wall");
+        }
     }
     else{
-        $(cell_picture).addClass("wall");
+        alert(data['message']);
     }
 });
 

@@ -81,8 +81,8 @@ class Room:
                 'ready': len(self.players) == self.need_players}
 
     def click(self, x, y, player_id):
-        #if player_id != self.players[self.current_player].id:
-         #   return False
+        if player_id != self.players[self.current_player].id:
+            return False, "it is not your step yet"
         return self.field.click(x, y, player_id)
 
     def __str__(self):
@@ -101,12 +101,12 @@ class Cell:
         if self.val == 0:
             self.val = 1
             self.color_id = player_id
-            return True
+            return True, 'ok'
         elif self.val == 1 and player_id != self.color_id:
             self.val = 2
             self.color_id = player_id
-            return True
-        return False
+            return True, 'ok'
+        return False, "you can't click on the wall"
 
 
 class Field:

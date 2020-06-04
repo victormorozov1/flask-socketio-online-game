@@ -33,7 +33,7 @@ class Guest:
 
 
 class Room:
-    def __init__(self, name, need_players, creator, n=20, m=30, num_of_actions_per_turn=3):
+    def __init__(self, name, need_players, creator, n, m, num_of_actions_per_turn):
         self.name = name
         self.need_players = need_players
         self.creator = creator
@@ -94,7 +94,8 @@ class Room:
                 'id': str(self.id),
                 'room_num_players_str': self.room_num_players_str(),
                 'players': [player.id for player in self.players],
-                'ready': len(self.players) == self.need_players}
+                'ready': len(self.players) == self.need_players,
+                'creator_id': self.creator.id}
 
     def click(self, x, y, player_id):
         current_player_ind = self.current_player // self.num_of_actions_per_turn

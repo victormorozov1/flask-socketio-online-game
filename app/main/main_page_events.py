@@ -27,8 +27,10 @@ def add_room(message):
     creator = guests[message['id']]
 
     if not creator.room:
-        room = Room(message['name'], message['need_players'], creator,
-                    message['n'] if 'n' in message.keys() else 20, message['m'] if 'm' in message.keys() else 30)
+        room = Room(message['name'], int(message['need_players']), creator,
+                    int(message['n']) if 'n' in message.keys() else 20,
+                    int(message['m']) if 'm' in message.keys() else 30,
+                    int(message['actions_per_turn'] if 'actions_per_turn' in message.keys() else 3))
         print('created new room:\n', room)
         emit('new_room', room.data(), room=0)
 

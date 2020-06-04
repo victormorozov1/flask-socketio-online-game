@@ -1,6 +1,7 @@
 console.log('start');
 var socket;
 var rooms = {};
+var have_room = false;
 
 $(document).ready(function(){
     var my_id;
@@ -88,12 +89,21 @@ $(document).ready(function(){
 
     socket.on('new_room', function(data) {
         console.log('new room');
+        if (my_id === data['creator_id'])
+        {
+            have_room = true;
+        }
         show_room(data);
     });
 
     socket.on('new_room_player', function(data) {
         console.log('new_room_participant');
         id = data['id'];
+
+        if (id === my_id){
+            have_room = true;
+        }
+
         room_data = data['room'];
         room_id = room_data['id'];
         console.log(id, room_id);
@@ -116,6 +126,12 @@ $(document).ready(function(){
 
     socket.on('player_leave_room', function(data) {
         id = data['id'];
+
+        if (id === my_id)
+        {
+            have_room = false;
+        }
+
         room_id = data['room']['id'];
         console.log('player', id, 'leave room', room_id);
         if (my_id === id) {
@@ -126,6 +142,23 @@ $(document).ready(function(){
     });
 
     $('#add-room').click(function() {
-        socket.emit('add_room', {name: 'new room', need_players: 2, id: my_id, n: 4, m: 4});
+        if (!have_room) {
+            $(".second-body").css("display", "block");
+        }
+        else{
+            alert('You already have room');
+        }
+    });
+
+    $('#create-room-button').click(function(){
+        socket.emit('add_room', {
+            name: $('#room-name-input').val(),
+            need_players: $('#num-players-input').val(),
+            id: my_id,
+            n: $('#n').val(),
+            m: $('#m').val(),
+            actions_per_turn: $('#num-actions-per-turn').val()
+        });
+        $(".second-body").css("display", "none");
     });
 });

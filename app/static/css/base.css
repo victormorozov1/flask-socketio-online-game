@@ -1,0 +1,21 @@
+:root{
+    --button-blue-color: #0079db;
+    --button-hover-blue-color: #0f93ff;
+}
+
+#send-message{
+    height: 50px;
+    width: 100%;
+    display: inline-block;
+    background-color: #0079db;
+    border-radius: 25px;
+    color: white;
+    padding: 10px;
+    box-sizing: border-box;
+    font-size: 20px;
+    text-align: center;
+}
+
+#send-message:hover{
+    background-color: #0f93ff;
+}

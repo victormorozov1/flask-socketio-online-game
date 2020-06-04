@@ -45,21 +45,19 @@
 #send-message-panel{
     display: inline-block;
     overflow: hidden;
-    background-color: yellow;
 }
 
 #message-input{
-    background-color: red;
     float: right;
     display: inline-block;
+    width: 100%;
 }
 
 #send-message{
     float: right;
     height: 50px;
-    width: 355px;
     font-size: 30px;
-    background-color: green;
+    width: 100%;
     display: inline-block;
 }
 

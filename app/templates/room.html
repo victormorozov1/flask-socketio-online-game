@@ -9,7 +9,7 @@
     <div id="field">
         {% for i in range(n) %}
             <div class="row">{% for j in range(m) %}<div class="cell" id="{{ i }}-{{ j }}">
-                {% if field[i][j][0] == 0 %}
+                {% if not field or field[i][j][0] == 0 %}
                     <div class="cell-picture" style="background-color: white; color: white"></div>
                 {% elif field[i][j][0] == 1 %}
                     <div class="cell-picture cross" style="background-color: {{ field[i][j][1] }}"></div>

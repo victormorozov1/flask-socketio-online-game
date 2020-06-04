@@ -52,11 +52,12 @@ class Room:
 
     def get_arr(self):
         arr = []
-        for i in self.field.arr:
-            arr.append([])
-            for j in i:
-                arr[-1].append([j.val, j.color])
-        return arr
+        if self.ready():
+            for i in self.field.arr:
+                arr.append([])
+                for j in i:
+                    arr[-1].append([j.val, j.color])
+            return arr
 
     def start(self):
         self.started = True

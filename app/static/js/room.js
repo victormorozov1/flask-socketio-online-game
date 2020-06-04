@@ -34,9 +34,22 @@ socket.on('chat_message', function(data) {
     message_node.className = 'message-node';
 
     let message = document.createElement('div');
+    let message_text = document.createElement('div');
+    let message_author = document.createElement('div');
+    let message_time = document.createElement('div');
     message.className = "message";
-    message.innerText = data["chat_message"] + ' ' + data["author"] + ' ' + data["time"];
+    message_text.className = "message-text";
+    message_author.className = "message-author";
+    message_time.className = "message-time";
+
     message_node.append(message);
+    message.append(message_author);
+    message.append(message_text);
+    message.append(message_time);
+
+    message_text.innerText = data['chat_message'];
+    message_author.innerText = data['author'];
+    message_time.innerText = data['time'];
 
     $("#message-list").append(message_node);
 

@@ -26,39 +26,77 @@
 
 #chat{
     margin: 10px;
-    border-radius: 10px;
     border: 3px solid #666666;
     height: 600px;
     float: right;
-    width: 300px;
+    width: 500px;
     display: inline-block;
 }
 
 #message-list{
     overflow: scroll;
-    width: 70%;
+    width: 100%;
     height: 100%;
-    background-color: aqua;
     display: inline-block;
 }
 
 #send-message-panel{
     display: inline-block;
     overflow: hidden;
+    width: 100%;
 }
 
 #message-input{
-    float: right;
     display: inline-block;
-    width: 100%;
+    width: 98%;
+    font-size: 20px;
 }
 
 #send-message{
     float: right;
     height: 50px;
-    font-size: 30px;
     width: 100%;
     display: inline-block;
+    background-color: #0079db;
+    border-radius: 25px;
+    color: white;
+    padding: 10px;
+    box-sizing: border-box;
+    font-size: 20px;
+    text-align: center;
+}
+
+#send-message:hover{
+    background-color: #0f93ff;
+}
+
+.message-text{
+    display: inline-block;
+    font-size: 18px;
+    color: #333333;
+}
+
+.message-time{
+    float: right;
+    display: inline-block;
+    font-size: 10px;
+    color: grey;
+}
+
+.message-author{
+    font-size: 14px;
+    color: #e0a467;
+}
+
+.message > *{
+    margin: 2px;
+}
+
+.message{
+    margin: 5px;
+    padding: 5px;
+    background-color: #ebebeb;
+    border-radius: 10px;
 }
 
 .cross{

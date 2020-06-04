@@ -27,7 +27,11 @@
     <div id="chat">
         <div id="message-list">
             {% for message in messages %}
-                <div class="message">{{ message.message }} {{ message.author }} {{ message.time }}</div>
+                <div class="message">
+                    <div class="message-author">{{ message.author }}</div>
+                    <div class="message-text">{{ message.message }}</div>
+                    <div class="message-time">{{ message.time }}</div>
+                </div>
             {% endfor %}
         </div>
         <div id="send-message-panel">

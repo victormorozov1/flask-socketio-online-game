@@ -17,7 +17,7 @@ change_cell_size();
 $('#message-list').scrollTop(1000000);
 var room_id = window.location.toString().split('/')[4];
 var my_id = getCookie('id');
-var socket = io.connect('http://' + document.domain + ':' + location.port + '/room');
+var socket = io.connect('https://' + document.domain + ':' + location.port + '/room');
 
 socket.emit("join", {room_id: window.location.toString().split('/')[4]});
 

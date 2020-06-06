@@ -23,6 +23,11 @@ def joined(message):
     emit('all_rooms', {'rooms': [room.data() for room in rooms.values()]})
 
 
+@socketio.on('answer_on_hello2', namespace='/')
+def joined(message):
+    emit('answer_on_answer', {})
+
+
 @socketio.on('add_room', namespace='/')
 def add_room(message):
     print('in add room')

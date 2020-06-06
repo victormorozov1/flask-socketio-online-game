@@ -85,6 +85,11 @@ $(document).ready(function(){
 
     socket.on('hello_with_info', function(data){
         alert('hello_with_info ' + data['info']);
+        socket.emit('answer_on_hello2', {});
+    });
+
+    socket.on('answer_on_answer', function(data){
+        alert('answer_on_answer_recieved');
     });
 
     socket.on('all_rooms', function(data){

@@ -79,6 +79,10 @@ $(document).ready(function(){
         my_id = data['id'];
     });
 
+    socket.on('hello', function(data){
+        alert('hello');
+    });
+
     socket.on('all_rooms', function(data){
         console.log('in rooms-list');
         for (let room of data['rooms']){

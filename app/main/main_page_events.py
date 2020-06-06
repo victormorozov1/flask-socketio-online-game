@@ -8,6 +8,7 @@ from .classes import Room, Guest, Message
 
 @socketio.on('joined', namespace='/')
 def joined(message):
+    emit('hello', {})
     id = int(message['id']) if 'id' in message else get_id()
     global guest
     if id in guests:
@@ -16,6 +17,7 @@ def joined(message):
         guest = Guest(id, name=message['name'])
     print(f'{message["name"]} is joined!!!  id={guest.id}')
     join_room(0)
+
     emit('id', {'id': guest.id})
     emit('all_rooms', {'rooms': [room.data() for room in rooms.values()]})
 

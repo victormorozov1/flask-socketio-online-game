@@ -9,6 +9,7 @@ from .classes import Room, Guest, Message
 @socketio.on('joined', namespace='/')
 def joined(message):
     emit('hello', {})
+    emit('hello_with_info', {'info': 'hello from server'})
     id = int(message['id']) if 'id' in message else get_id()
     global guest
     if id in guests:

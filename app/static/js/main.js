@@ -83,6 +83,10 @@ $(document).ready(function(){
         alert('hello');
     });
 
+    socket.on('hello_with_info', function(data){
+        alert('hello_with_info ' + data['info']);
+    });
+
     socket.on('all_rooms', function(data){
         console.log('in rooms-list');
         for (let room of data['rooms']){

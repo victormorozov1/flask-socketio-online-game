@@ -2,3 +2,4 @@ Flask==1.1.1
 Flask_SocketIO==4.2.1
 gunicorn
 redis
+fcntl

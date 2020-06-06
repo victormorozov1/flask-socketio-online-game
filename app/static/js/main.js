@@ -58,7 +58,7 @@ $(document).ready(function(){
         });
     }
 
-    socket = io.connect('https://' + document.domain + ':' + location.port + '/');
+    socket = io.connect(window.location.toString());
 
     socket.on('connect', function() {
         console.log('connected');

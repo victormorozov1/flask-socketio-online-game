@@ -1,6 +1,7 @@
 from app import create_app, socketio
-
-app = create_app(debug=True)
+from os import environ
 
 if __name__ == '__main__':
-    socketio.run(app)
+    host = '0.0.0.0'
+    port = int(environ.get('PORT', 5000))
+    socketio.run(create_app(), host=host, port=port)

@@ -54,3 +54,10 @@ def add_room(message):
         room_id = guests[id].room.id
     if guests[id].leave_room():
         emit('player_leave_room', {'id': id, 'room': rooms[room_id].data()}, room=0)
+
+
+@socketio.on('delete_room', namespace='/')
+def joined(message):
+    id = int(message['id'])
+    print("deleting room", id)
+    del rooms[id]

@@ -23,6 +23,7 @@ $(document).ready(function(){
         room_node_leave.className = 'room-leave';
         room_node_leave.innerText = 'leave room';
         $(room_node_leave).css('display', 'none');
+
         let room_node_join = document.createElement('div');
         room_node_join.className = 'room-join';
         room_node_join.id = 'join-' + room_id;
@@ -37,12 +38,20 @@ $(document).ready(function(){
         room_node.append(room_node_join);
         room_node.append(room_node_leave);
 
+        let delete_room = document.createElement('div');
+        delete_room.className = "delete-room";
+        delete_room.id = "delete-room-" + room_id;
+        delete_room.innerText = "delete";
+        room_node.append(delete_room);
+        if (my_id !== data['creator_id'] || data["room_num_players_str"].split('/')[0] !== "0"){
+            $(delete_room).css("display", "none");
+        }
+
         let room_node_num_participants = document.createElement('div');
         room_node_num_participants.className = 'room-num-participants';
         room_node_num_participants.innerText = data['room_num_players_str'];
         room_node.append(room_node_num_participants);
 
-        //document.body.append(room_node);
         $('#rooms-list').append(room_node);
 
         $('.room-join').click(function (event) {
@@ -150,6 +159,13 @@ $(document).ready(function(){
         }
     });
 
+    $('.delete-room').click(function (event) {
+        console.log("click");
+        event.stopPropagation();
+        event.stopImmediatePropagation();
+        socket.emit('join_room', {room_id: this.id.split('-')[1], id: my_id});
+    });
+
     $('#create-room-button').click(function(){
         socket.emit('add_room', {
             name: $('#room-name-input').val(),
@@ -161,4 +177,6 @@ $(document).ready(function(){
         });
         $(".second-body").css("display", "none");
     });
+
+
 });

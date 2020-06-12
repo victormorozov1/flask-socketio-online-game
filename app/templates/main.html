@@ -6,34 +6,36 @@
 
 {% block content %}
     <script src="{{ url_for('static', filename="js/main.js") }}"></script>
-    <div id="add-room">add room</div>
-    <div id="rooms-list"></div>
-    <div class="second-body" style="display: none">
-        <div class="modal-window">
-            <form>
-                <h1>Creating a new room</h1>
-                <div class="form-group">
-                    <label for="room-name-input">Number of players</label>
-                    <input class="form-control" type="text" id="room-name-input" placeholder="Room name">
-                </div>
-                <div class="form-group">
-                    <label for="num-players-input">Number of players</label>
-                    <input class="form-control" type="number" id="num-players-input" min="2" max="10" value=2>
-                </div>
-                <div class="form-group">
-                    <label for="n">Field height</label>
-                    <input class="form-control" type="number" id="n" min="4" max="100" value=6>
-                </div>
-                <div class="form-group">
-                    <label for="m">Field width</label>
-                    <input class="form-control" type="number" id="m" min="4" max="100" value=6>
-                </div>
-                <div class="form-group">
-                    <label for="num-actions-per-turn">Number of the actions per turn</label>
-                    <input class="form-control" type="number" id="num-actions-per-turn" min="1" max="100" value=3>
-                </div>
-                <div class="btn btn-primary" id="create-room-button">Create room</div>
-            </form>
+    <div style="position: relative; left: 20%; width: 60%; top: 30px">
+        <div id="add-room" class="btn btn-primary">add room</div>
+        <div id="rooms-list"></div>
+        <div class="second-body" style="display: none">
+            <div class="modal-window">
+                <form>
+                    <h1>Creating a new room</h1>
+                    <div class="form-group">
+                        <label for="room-name-input">Number of players</label>
+                        <input class="form-control" type="text" id="room-name-input" placeholder="Room name">
+                    </div>
+                    <div class="form-group">
+                        <label for="num-players-input">Number of players</label>
+                        <input class="form-control" type="number" id="num-players-input" min="2" max="10" value=2>
+                    </div>
+                    <div class="form-group">
+                        <label for="n">Field height</label>
+                        <input class="form-control" type="number" id="n" min="4" max="100" value=6>
+                    </div>
+                    <div class="form-group">
+                        <label for="m">Field width</label>
+                        <input class="form-control" type="number" id="m" min="4" max="100" value=6>
+                    </div>
+                    <div class="form-group">
+                        <label for="num-actions-per-turn">Number of the actions per turn</label>
+                        <input class="form-control" type="number" id="num-actions-per-turn" min="1" max="100" value=3>
+                    </div>
+                    <div class="btn btn-primary" id="create-room-button">Create room</div>
+                </form>
+            </div>
         </div>
     </div>
 {% endblock %}

@@ -23,16 +23,25 @@
     display: inline-block;
 }
 
-#add-room{
-    height: 100px;
-    width: 100px;
-    background-color: #888888;
-}
-
 .room{
-    background-color: aquamarine;
+    background-color: #a8d8ff;
+    padding: 2px;
     display: flex;
     justify-content: space-between;
+    color: #00008b;
+    border: 1px solid #42aaff;
+}
+
+#rooms-list{
+    border: 1px solid #42aaff;
+}
+
+.room:hover{
+    background-color: #ccccff
+}
+
+.room > a{
+    color: #00008b;
 }
 
 .room > *{

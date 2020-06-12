@@ -30,11 +30,9 @@
     justify-content: space-between;
     color: #00008b;
     border: 1px solid #42aaff;
+    margin: 2px;
 }
 
-#rooms-list{
-    border: 1px solid #42aaff;
-}
 
 .room:hover{
     background-color: #ccccff

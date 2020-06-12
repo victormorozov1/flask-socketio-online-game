@@ -178,5 +178,14 @@ $(document).ready(function(){
         $(".second-body").css("display", "none");
     });
 
-
+    $('#menu-search-button').click(function(){
+        let s = $("#menu-search-input").val();
+        console.log(s);
+        $('.room').each(function(){
+            console.log($(this).children('.room-name').text());
+            if (!are_similar($(this).children('.room-name').text(), s)){
+                $(this).css("display", "none");
+            }
+        });
+    });
 });

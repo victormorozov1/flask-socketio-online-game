@@ -1,3 +1,3 @@
 # Online game "Var of Viruses" on Flask and Socket.io
 
-demo https://war-of-viruses.herokuapp.com/
+demo http://51.250.107.200:5000/
